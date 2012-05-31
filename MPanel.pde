@@ -10,6 +10,7 @@ class MPanel {
   int mode;                   // to keep track of the mode - 0:Recall, 1:Store, 2:Swap
   boolean swapAIn;            // to keep track of whether or not the first MButton for swapping (A) has been identified   
   int aIndex;                 // index of MButton A to be swapped
+  int activeDataset;
 
 
 

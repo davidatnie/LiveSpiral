@@ -14,7 +14,7 @@ class SpiralActivity extends LVActivity {
 
   // Constructor  
   
-  SpiralActivity( LiveViz o ) {
+  SpiralActivity( LiveSpiral o ) {
     super( o );
     bgColor = color( 255, 255, 255 );
     spaUI = new SpiralUI( this );

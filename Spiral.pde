@@ -360,16 +360,16 @@ class Spiral extends Section {
       // determining mouse over
       s.isMouseOverFunc = checkMouseFunc( s, mouseX, mouseY );
       if( !s.isMouseOverFunc ) {
-        s.isMouseOverFunc = checkMouseFunc( s, myJays[0].xPos, myJays[0].yPos );
-        if( !s.isMouseOverFunc ) 
-          s.isMouseOverFunc = checkMouseFunc( s, myJays[1].xPos, myJays[1].yPos );
+        //s.isMouseOverFunc = checkMouseFunc( s, myJays[0].xPos, myJays[0].yPos );
+        //if( !s.isMouseOverFunc ) 
+          //s.isMouseOverFunc = checkMouseFunc( s, myJays[1].xPos, myJays[1].yPos );
       }
       
       s.isMouseOverFreq = checkMouseFreq( s, mouseX, mouseY );
       if( !s.isMouseOverFreq ) {
-        s.isMouseOverFreq = checkMouseFreq( s, myJays[0].xPos, myJays[0].yPos );
-        if( !s.isMouseOverFreq )
-          s.isMouseOverFreq = checkMouseFreq( s, myJays[1].xPos, myJays[1].yPos );
+        //s.isMouseOverFreq = checkMouseFreq( s, myJays[0].xPos, myJays[0].yPos );
+        //if( !s.isMouseOverFreq )
+          //s.isMouseOverFreq = checkMouseFreq( s, myJays[1].xPos, myJays[1].yPos );
       }   
     } // end for f
   } // end drawSpokes()

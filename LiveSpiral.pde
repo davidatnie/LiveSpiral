@@ -14,32 +14,39 @@ import processing.serial.*;
   Divider[] dividers;
 
   Serial arduinoPort;
-  MPanel mPanel;
-  JPointer[] myJays;
+  int activeDataset;
+  String[] datasets;
+  //MPanel mPanel;
+  //JPointer[] myJays;
   // end from Spiral v1.6
 
   String[] aDetails = new String[ 3 ];
+
+  // applet params
+  String hostip, school, teacher, cnameandcyear, cname, cyear, actid, starttimeFull, starttimeTrimmed, functioncall;
 
 
 
 
 void setup() {
   setupDisplayElements(); 
-  
-  aDetails[ 0 ] = param( "fullUrl" );  
-  aDetails[ 0 ] = param( "startTime" );  
-  aDetails[ 0 ] = param( "title" );  
-  println( aDetails ); // just to help in debugging
+  readParams();
 
+  aDetails[ 0 ] = "http://" + hostip + "/" + functioncall + "?aid=" + actid + "&ind=0";
+  aDetails[ 1 ] = starttimeTrimmed;  
+  aDetails[ 2 ] = actid + " " + cnameandcyear + " " + school + " " + teacher;  
+  
   spa = new SpiralActivity( this );
   spa.startSpiral( aDetails );
 
   // temporary block 
+  /*
   if( arduinoPort == null ) {
     myJays = new JPointer[ 2 ];
     myJays[0] = new JPointer( 0, 0, color(0,0,0), color(0,0,0) );
     myJays[1] = new JPointer( 0, 0, color(0,0,0), color(0,0,0) );
   }
+  */
 
 } // end setup()
 
@@ -56,18 +63,11 @@ void draw() {
 
 
 void mousePressed() {
-  currentActivity.aUI.executeMousePressed(); 
+  spa.aUI.executeMousePressed(); 
   if ( mouseButton == RIGHT ) {
-    background( 180 );
-    if ( currentActivity == menu & spa != null )
-      currentActivity = spa;
-    else if( currentActivity == spa & wva != null) {
-      currentActivity = wva;
-    }
-    else { 
-      menu = new MenuActivity( this );
-      currentActivity = menu;
-    }
+    /*
+    Right-click now does nothing, was used to switch between Activities
+    */
   } // end if mouseButton == RIGHT
 } // end mousePressed()
 
@@ -75,14 +75,14 @@ void mousePressed() {
 
 
 void mouseDragged() {
-  currentActivity.aUI.executeMouseDragged();
+  spa.aUI.executeMouseDragged();
 } // end mouseDragged()
 
 
 
 
 void mouseReleased() {
-  currentActivity.aUI.executeMouseReleased();
+  spa.aUI.executeMouseReleased();
 } // end mouseReleased()
 
 
@@ -106,6 +106,26 @@ void setupDisplayElements() {
   dividers[ 0 ] = new Divider( true, 0, 300, 350, 300, 90 );
   dividers[ 1 ] = new Divider( false, 350, 0, 350, height, 90 );
 } // end setupDisplayElements()
+
+
+
+
+void readParams() {
+// Reads applet param tags from HTML file
+//
+  hostip = param( "hostip" );
+  school = param( "school" );
+  teacher = param( "teacher" );
+  cnameandcyear = param( "cnameandcyear" );
+  String[] cpieces = splitTokens( cnameandcyear, ":" );
+  cname = cpieces[ 0 ];
+  cyear = cpieces[ 1 ];
+  actid = param( "actid" );
+  starttimeFull = param( "starttime" );
+  starttimeTrimmed = starttimeFull.substring( starttimeFull.length()-17, starttimeFull.length()-9 );
+  functioncall = param( "functioncall" );
+} // end readParams() 
+
 
 
 
