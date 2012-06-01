@@ -1,24 +1,14 @@
 // This is the main class for Live Spiral. Activity selection is no longer part of the Processing applet
 
-import processing.serial.*;
-
 // Fields
 
   SpiralActivity spa;
 
-  // From Spiral v1.6
   color hitColor, noHitColor, hitColorScatter, noHitColorScatter;
   color popUpBkgrd, popUpTxt, butOv, butPress;
   PFont spiralFont;
   PFont pdfFont;
   Divider[] dividers;
-
-  Serial arduinoPort;
-  int activeDataset;
-  String[] datasets;
-  //MPanel mPanel;
-  //JPointer[] myJays;
-  // end from Spiral v1.6
 
   String[] aDetails = new String[ 3 ];
 
@@ -30,23 +20,18 @@ import processing.serial.*;
 
 void setup() {
   setupDisplayElements(); 
-  readParams();
-
+  //readParams();
+  /*
   aDetails[ 0 ] = "http://" + hostip + "/" + functioncall + "?aid=" + actid + "&ind=0";
   aDetails[ 1 ] = starttimeTrimmed;  
   aDetails[ 2 ] = actid + " " + cnameandcyear + " " + school + " " + teacher;  
+  */
+  aDetails[ 0 ] = "http://203.116.116.34:80/getAllContributionsAfter?aid=8&ind=0";
+  aDetails[ 1 ] = "15:00:00";
+  aDetails[ 2 ] = "Just for testing";
   
   spa = new SpiralActivity( this );
   spa.startSpiral( aDetails );
-
-  // temporary block 
-  /*
-  if( arduinoPort == null ) {
-    myJays = new JPointer[ 2 ];
-    myJays[0] = new JPointer( 0, 0, color(0,0,0), color(0,0,0) );
-    myJays[1] = new JPointer( 0, 0, color(0,0,0), color(0,0,0) );
-  }
-  */
 
 } // end setup()
 

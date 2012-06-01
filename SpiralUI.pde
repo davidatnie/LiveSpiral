@@ -14,7 +14,6 @@ class SpiralUI extends AUI {
     super();
     owner = o;
 
-    createSpButton( o.x2Frame -100, o.y1Frame + 570, o.x2Frame -45, o.y1Frame + 590, getNextIndexArrSpButtons(), "-> PDF",   popUpTxt, popUpBkgrd, butOv, butPress );
     createSpButton( o.x2Frame -100, o.y1Frame + 595, o.x2Frame - 45, o.y1Frame + 615, getNextIndexArrSpButtons(), "Font +", popUpTxt, popUpBkgrd, butOv, butPress );
     createSpButton( o.x2Frame -100, o.y1Frame + 620, o.x2Frame - 45, o.y1Frame + 640, getNextIndexArrSpButtons(), "Font -", popUpTxt, popUpBkgrd, butOv, butPress );
 
@@ -56,26 +55,21 @@ class SpiralUI extends AUI {
   // then, UI routines
   if( mouseButton == LEFT ) {
     int whichOne = getPressedArrSpButton();
-    if( whichOne == 0 ) {       // "-> PDF"
-      /* Do Nothing - temporary, until solutin for applet is implemented
-      owner.owner.savePDF = true;
-      */
-    }
-    else if( whichOne == 1 ) {  // "Font +"
+    if( whichOne == 0 ) {  // "Font +"
       currentSpiral.spokeFontSize++;
       currentSpiral.spokeFontSize = constrain( currentSpiral.spokeFontSize, 8, 18 );
     }
-    else if( whichOne == 2 ) {  // "Font -"
+    else if( whichOne == 1 ) {  // "Font -"
       currentSpiral.spokeFontSize--;
       currentSpiral.spokeFontSize = constrain( currentSpiral.spokeFontSize, 8, 18 );
     }
-    else if( whichOne == 3 ) {  // "R. CW"
+    else if( whichOne == 2 ) {  // "R. CW"
       currentSpiral.rotateClockWise();
     }
-    else if( whichOne == 4 ) {  // "Reset"
+    else if( whichOne == 3 ) {  // "Reset"
       currentSpiral.rotateReset();
     } 
-    else if( whichOne == 5 ) {  // "R. CCW"
+    else if( whichOne == 4 ) {  // "R. CCW"
       currentSpiral.rotateCounterClockWise();
     }
   } // end if mouseButton == LEFT
