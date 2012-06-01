@@ -1,22 +1,13 @@
-Files belonging to Live Spiral:
-SpiralActivity.pde
-SpiralUI.pde
-Spiral.pde
-Spoke.pde
-Stats.pde
-OpStats.pde
-OpDistrib.pde
-OpsUsage.pde
-Scatter.pde
-DistribPt.pde
+This is the Wave visualizer.
 
-
-Files belonging to Live Wave:
-WaveActivity.pde
-WaveUI.pde
-Wave.pde
-WavePt.pde
-Student.pde
-Tab.pde
-Deployment.pde
-Strat.pde
+Notes:
+* SpiralActivity extends LVActivity, which extends Activity
+* Spiral extends Section
+* Spoke extends Function
+* SpiralUI extends AUI
+* GUI classes ( make sure to sync with what's in Wave viz ):
+  - Button
+  - SpButton
+  - Dropdown
+  - ScrollPosButton
+  - View

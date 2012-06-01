@@ -6,6 +6,7 @@ class View {
 
   float x1, y1, x2, y2;              // edge to edge coordinate ( including scroll bars )
   float x1a, y1a, x2a, y2a;          // viewing area edge coordinates ( excluding scroll bars )
+  float borderN, borderS, borderE, borderW; // the north south east west border of the view ( white space )
   float x1sbv, y1sbv, x2sbv, y2sbv;  // scroll bar Vertical - coordinates
   float x1sbh, y1sbh, x2sbh, y2sbh;  // scroll bar Horizontal - coordinates
   float viewWidth, viewHeight;       
@@ -20,6 +21,7 @@ class View {
   float step;  
   float xOffsetRender, yOffsetRender;
   boolean scrollableVer, scrollableHor;
+  boolean mouseWithin;  // true if mouse pointer is within the view area
 
 
 
@@ -65,6 +67,10 @@ class View {
     
     viewWidth = x2a - x1a;
     viewHeight = y2a - y1a;
+    borderN = 0;
+    borderS = 0;
+    borderE = 50;	
+    borderW = 0;
     
     xScrollPos1 = 0;
     yScrollPos1 = 0;
@@ -84,11 +90,11 @@ class View {
     
     img = null;
     
-    contentHeight = 0;
-    contentWidth = 0;
+    contentHeight = 0+borderN+borderS;
+    contentWidth = 0+borderE+borderW;
 
     bgColor = color( 255, 255, 255 ); // setting white as the default color
-
+    updateMouseWithin();
     updateOffsetRenders();
     
   } // end constructor  
@@ -183,12 +189,12 @@ class View {
   
   
   void updateContentDimension( float xCheck, float yCheck ) {
-    if( contentWidth < xCheck ) {
-      contentWidth = xCheck;
+    if( contentWidth < xCheck +borderE+borderW ) {
+      contentWidth = xCheck +borderE+borderW;
       sbHor.reposition( getScrollPos() ); 
     }
-    if( contentHeight < yCheck ) {
-      contentHeight = yCheck;
+    if( contentHeight < yCheck +borderN+borderS ) {
+      contentHeight = yCheck +borderN+borderS;
       sbVer.reposition( getScrollPos() );
     }
   } // end updateContentDimension()
@@ -284,8 +290,8 @@ class View {
 
   void setImage( PImage pimg ) {
     img = pimg;
-    setContentHeight( pimg.height );
-    setContentWidth( pimg.width );
+    setContentHeight( pimg.height +borderN+borderS );
+    setContentWidth( pimg.width +borderE+borderW );
   } // end setImage()
   
 
@@ -372,13 +378,23 @@ class View {
 
 
 
+  
+  void updateMouseWithin() {
+    if( mouseX >= x1a && mouseX <= x2a && mouseY >= y1a && mouseY <= y2a )
+      mouseWithin = true;
+    else
+      mouseWithin = false;
+  } // end updateMouseWithin()
+
+
+
 
   void display() {
+    updateMouseWithin();
     stroke( 0 );
     noFill();
     rectMode( CORNERS );
     rect( x1, y1, x2, y2 );
-    drawDebugInfo();
     fill( 60, 60, 60 );
     rect( x1sbv, y1sbv, x2sbv, y2sbv );
     rect( x1sbh, y1sbh, x2sbh, y2sbh );
